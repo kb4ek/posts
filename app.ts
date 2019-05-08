@@ -3,7 +3,9 @@ import * as dotenv from 'dotenv';
 import * as bodyParser from 'body-parser';
 import * as morgan from 'morgan';
 
-import { connect } from 'database/index';
+import apiController from './routes/apiController';
+
+import { connect } from './database/index';
 
 dotenv.config();
 
@@ -13,5 +15,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 connect(true).then(() => console.log('데이터베이스와 성공적으로 연결되었습니다.'));
+
+app.use('/api', apiController);
 
 export default app;
