@@ -16,6 +16,7 @@ import {
   timestamps: true,
 })
 export default class User extends Model<User> {
+  @AutoIncrement
   @PrimaryKey
   @Column(DataType.INTEGER)
   public pk: number;
@@ -27,6 +28,10 @@ export default class User extends Model<User> {
   @AllowNull(false)
   @Column(DataType.STRING)
   public password: string;
+
+  @AllowNull(false)
+  @Column(DataType.STRING)
+  public passwordKey: string;
 
   @AllowNull(false)
   @Column(DataType.STRING)
