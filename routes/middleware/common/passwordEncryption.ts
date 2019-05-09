@@ -8,13 +8,14 @@ const passwordEncryption = (req: Request, res: Response, next: NextFunction) => 
   const { algorithm, saltSize, iteration, encryptionSize } = encryptionJson;
 
   try {
-    const salt = req.body.password || randomBytes(saltSize).toString('base64');
+    const salt = (res.locals.user && res.locals.user.passwordKey) || randomBytes(saltSize).toString('base64');
     const key = pbkdf2Sync(password, salt, iteration, encryptionSize, algorithm).toString('base64');
 
     res.locals.temp = {
       password: key,
       passwordKey: salt,
     };
+
     next();
   } catch (err) {
     console.log(err);
