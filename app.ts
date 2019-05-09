@@ -14,7 +14,7 @@ app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-connect(true).then(() => console.log('데이터베이스와 성공적으로 연결되었습니다.'));
+connect(false).then(() => console.log('데이터베이스와 성공적으로 연결되었습니다.'));
 
 app.use('/api', apiController);
 
