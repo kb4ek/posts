@@ -6,17 +6,17 @@ import { resolveTxt } from 'dns';
 
 const createPost = async (req: Request, res: Response, next: NextFunction) => {
   const { title, content } = req.body;
-  const userID = res.locals.user.userID;
+  const pk = res.locals.user.pk;
 
   try {
     await User.findOne({
       where: {
-        userID: userID,
+        pk,
       },
     }).then((user: User) => {
       try {
         Post.create({
-          userPk: user.pk,
+          userPk: pk,
           title: title,
           contents: content,
           author: user.name,
