@@ -7,7 +7,7 @@ const findUser = async (req: Request, res: Response, next: NextFunction) => {
     const { id } = req.body;
 
     await User.findOne({
-      where: { userID: id },
+      where: { id },
     }).then((user: User) => {
       switch (req.path) {
         case '/register':

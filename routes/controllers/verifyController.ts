@@ -1,18 +1,18 @@
 import { Router } from 'express';
 
 //validation, common
-import LoginValidation from '../middleware/login/_validation';
-import JoinValidation from '../middleware/register/_validation';
+import LoginValidation from '../middleware/user/login/_validation';
+import JoinValidation from '../middleware/user/register/_validation';
 import checkValidation from '../middleware/common/checkValidation';
 import findUser from '../middleware/common/findUser';
 
 //login
-import login from '../middleware/login/login';
+import login from '../middleware/user/login/login';
 import issueToken from '../middleware/jwt/issueToken';
 
 //register
-import passwordEncryption from '../middleware/common/passwordEncryption';
-import createUser from '../middleware/register/createUser';
+import passwordEncryption from '../middleware/user/common/passwordEncryption';
+import createUser from '../middleware/user/register/createUser';
 
 const router = Router();
 
