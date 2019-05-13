@@ -23,7 +23,7 @@ export default class User extends Model<User> {
 
   @AllowNull(false)
   @Column(DataType.STRING)
-  public userID: string;
+  public id: string;
 
   @AllowNull(false)
   @Column(DataType.STRING)

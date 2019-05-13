@@ -12,6 +12,7 @@ import {
   Table,
   Default,
 } from 'sequelize-typescript';
+import { TextDataType } from 'sequelize/types';
 
 @Table({
   timestamps: true,
@@ -22,15 +23,19 @@ export default class Post extends Model<Post> {
   @Column(DataType.INTEGER)
   public pk: number;
 
+  @AllowNull(false)
+  @Column(DataType.INTEGER)
+  public userPk: number;
+
   @Column(DataType.STRING)
   public title: string;
 
-  @Column(DataType.STRING)
-  public contents: string;
+  @Column(DataType.TEXT)
+  public content: string;
 
   @AllowNull(false)
   @Column(DataType.STRING)
-  public writer: string;
+  public author: string;
 
   @AllowNull(false)
   @Default(0)
