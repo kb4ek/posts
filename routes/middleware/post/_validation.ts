@@ -14,7 +14,7 @@ const PostValidation: ValidationChain[] = [
         return false;
       }
     }), */
-  body('contents').isString(),
+  body('content').isString(),
   /* .custom((value, { req }) => {
       const contentsRegExp: RegExp = new RegExp(contents);
 
