@@ -6,7 +6,7 @@ import User from '../../../database/models/user';
 const issueToken = (req: Request, res: Response, next: NextFunction) => {
   const user: User = res.locals.user;
   const tokenSecret = process.env.TOKEN_SECRET;
-  const token = jwt.sign({ token: user.id }, tokenSecret);
+  const token = jwt.sign({ token: user.pk }, tokenSecret);
 
   res.status(200).json({
     result: {
