@@ -10,12 +10,12 @@ const verifyToken = async (req: Request, res: Response, next: NextFunction) => {
     const decoded = jwt.verify(token as string, tokenSecret).token;
     await User.findOne({
       where: {
-        userID: decoded,
+        pk: decoded,
       },
     }).then((user: User) => {
       if (user) {
         res.locals.user = {
-          userID: decoded,
+          pk: decoded,
         };
         next();
       } else {

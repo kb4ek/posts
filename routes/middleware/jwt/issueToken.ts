@@ -17,7 +17,7 @@ const issueToken = (req: Request, res: Response, next: NextFunction) => {
       token: token,
       user: {
         pk: user.pk,
-        userID: user.id,
+        id: user.id,
         password: user.password,
         passwordKey: user.passwordKey,
         name: user.name,
