@@ -10,7 +10,11 @@ import {
   PrimaryKey,
   UpdatedAt,
   Table,
+  HasMany,
 } from 'sequelize-typescript';
+import Post from './post';
+import post_like from './post_like';
+import comment from './comment';
 
 @Table({
   timestamps: true,
@@ -42,4 +46,13 @@ export default class User extends Model<User> {
 
   @UpdatedAt
   public updatedAt: Date;
+
+  @HasMany(() => Post)
+  public post: Post[];
+
+  @HasMany(() => post_like)
+  public postLike: post_like;
+
+  @HasMany(() => comment)
+  public comment: comment;
 }

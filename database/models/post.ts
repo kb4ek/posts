@@ -11,8 +11,12 @@ import {
   UpdatedAt,
   Table,
   Default,
+  HasOne,
+  HasMany,
 } from 'sequelize-typescript';
-import { TextDataType } from 'sequelize/types';
+import User from './user';
+import post_like from './post_like';
+import comment from './comment';
 
 @Table({
   timestamps: true,
@@ -23,6 +27,7 @@ export default class Post extends Model<Post> {
   @Column(DataType.INTEGER)
   public pk: number;
 
+  @ForeignKey(() => User)
   @AllowNull(false)
   @Column(DataType.INTEGER)
   public userPk: number;
@@ -52,4 +57,15 @@ export default class Post extends Model<Post> {
 
   @UpdatedAt
   public updatedAt: Date;
+
+  @BelongsTo(() => User, {
+    onDelete: 'CASCADE',
+  })
+  public user: User;
+
+  @HasMany(() => post_like)
+  public postLike: post_like;
+
+  @HasMany(() => comment)
+  public comment: comment;
 }
