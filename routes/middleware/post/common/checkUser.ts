@@ -5,16 +5,16 @@ import Post from '../../../../database/models/post';
 
 const findUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const user_pk = res.locals.user.pk;
+    const user: User = res.locals.user;
     const pk = req.query.postId;
 
-    await Post.findOne({
+    Post.findOne({
       where: { pk },
     }).then((post: Post) => {
-      if (post.userPk === user_pk) {
+      if (post.userPk === user.pk) {
         res.locals.temp = {
           postPk: pk,
-          userPk: user_pk,
+          userPk: user.pk,
         };
         next();
       } else {

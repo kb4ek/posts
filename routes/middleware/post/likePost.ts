@@ -5,14 +5,14 @@ import post_like from '../../../database/models/post_like';
 
 const likePost = async (req: Request, res: Response, next: NextFunction) => {
   const postPk = req.query.postId;
-  const userPk = res.locals.user.pk;
+  const user: User = res.locals.user;
 
   try {
-    await post_like
+    post_like
       .findOne({
         where: {
           postPk: postPk,
-          userPk: userPk,
+          userPk: user.pk,
         },
       })
       .then((like: post_like) => {
@@ -20,7 +20,7 @@ const likePost = async (req: Request, res: Response, next: NextFunction) => {
           post_like.destroy({
             where: {
               postPk: postPk,
-              userPk: userPk,
+              userPk: user.pk,
             },
           });
 
@@ -28,7 +28,7 @@ const likePost = async (req: Request, res: Response, next: NextFunction) => {
         } else {
           post_like.create({
             postPk: postPk,
-            userPk: userPk,
+            userPk: user.pk,
           });
 
           res.status(200).json({ result: { SUCCESS: true, message: '좋아요 성공' } });

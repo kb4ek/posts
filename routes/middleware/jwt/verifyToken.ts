@@ -7,16 +7,14 @@ const verifyToken = async (req: Request, res: Response, next: NextFunction) => {
   const tokenSecret: string = process.env.TOKEN_SECRET;
 
   try {
-    const decoded = jwt.verify(token as string, tokenSecret).token;
-    await User.findOne({
+    const { pk } = jwt.verify(token as string, tokenSecret);
+    User.findOne({
       where: {
-        pk: decoded,
+        pk,
       },
     }).then((user: User) => {
       if (user) {
-        res.locals.user = {
-          pk: decoded,
-        };
+        res.locals.user = user;
         next();
       } else {
         res.status(400).json({ result: { SUCCESS: false, message: 'user data error' } });

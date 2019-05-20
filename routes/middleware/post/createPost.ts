@@ -2,21 +2,20 @@ import { NextFunction, Request, Response } from 'express';
 
 import User from '../../../database/models/user';
 import Post from '../../../database/models/post';
-import { resolveTxt } from 'dns';
 
 const createPost = async (req: Request, res: Response, next: NextFunction) => {
   const { title, content } = req.body;
-  const pk = res.locals.user.pk;
+  const user: User = res.locals.user;
 
   try {
-    await User.findOne({
+    User.findOne({
       where: {
-        pk,
+        pk: user.pk,
       },
     }).then((user: User) => {
       try {
         Post.create({
-          userPk: pk,
+          userPk: user.pk,
           title: title,
           contents: content,
           author: user.name,

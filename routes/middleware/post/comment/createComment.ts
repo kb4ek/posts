@@ -4,16 +4,16 @@ import Comment from '../../../../database/models/comment';
 import User from '../../../../database/models/user';
 
 const createComment = async (req: Request, res: Response, next: NextFunction) => {
-  const userPk = res.locals.user.pk;
+  const user: User = res.locals.user;
   const postPk = req.query.postId;
 
   try {
-    await User.findOne({
-      where: { pk: userPk },
+    User.findOne({
+      where: { pk: user.pk },
     }).then((user: User) => {
       Comment.create({
         name: user.name,
-        userPk: userPk,
+        userPk: user.pk,
         postPk: postPk,
         content: req.body.comment,
       });
@@ -25,7 +25,7 @@ const createComment = async (req: Request, res: Response, next: NextFunction) =>
         },
         data: {
           name: user.name,
-          userPk: userPk,
+          userPk: user.pk,
           postPk: postPk,
           comment: req.body.comment,
         },

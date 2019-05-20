@@ -8,7 +8,7 @@ const editPost = async (req: Request, res: Response, next: NextFunction) => {
   const pk = res.locals.temp.postPk;
 
   try {
-    await Post.update(
+    Post.update(
       {
         title,
         content,
