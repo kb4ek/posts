@@ -51,8 +51,8 @@ export default class User extends Model<User> {
   public post: Post[];
 
   @HasMany(() => post_like)
-  public postLike: post_like;
+  public postLike: post_like[];
 
   @HasMany(() => comment)
-  public comment: comment;
+  public comment: comment[];
 }

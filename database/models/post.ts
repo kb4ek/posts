@@ -64,8 +64,8 @@ export default class Post extends Model<Post> {
   public user: User;
 
   @HasMany(() => post_like)
-  public postLike: post_like;
+  public postLike: post_like[];
 
   @HasMany(() => comment)
-  public comment: comment;
+  public comment: comment[];
 }
