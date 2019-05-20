@@ -23,11 +23,13 @@ import commentValidation from '../middleware/post/comment/_validation';
 
 const router = Router();
 
-router.post('/write', verifyToken, postValidation, checkValidation, createPost);
-router.post('/edit', verifyToken, checkUser, postValidation, checkValidation, editPost);
-router.post('/delete', verifyToken, checkUser, deletePost);
-router.post('/like', verifyToken, likePost);
+router.use(verifyToken);
 
-router.post('/comment/write', verifyToken, commentValidation, checkValidation, createComment);
+router.post('/write', postValidation, checkValidation, createPost);
+router.post('/edit', checkUser, postValidation, checkValidation, editPost);
+router.post('/delete', checkUser, deletePost);
+router.post('/like', likePost);
+
+router.post('/comment/write', commentValidation, checkValidation, createComment);
 
 export default router;
