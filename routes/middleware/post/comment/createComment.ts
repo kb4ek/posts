@@ -12,7 +12,7 @@ const createComment = async (req: Request, res: Response, next: NextFunction) =>
       where: { pk: user.pk },
     }).then((user: User) => {
       Comment.create({
-        name: user.name,
+        author: user.name,
         userPk: user.pk,
         postPk: postPk,
         content: req.body.comment,
@@ -24,7 +24,7 @@ const createComment = async (req: Request, res: Response, next: NextFunction) =>
           message: '댓글이 작성되었습니다.',
         },
         data: {
-          name: user.name,
+          author: user.name,
           userPk: user.pk,
           postPk: postPk,
           comment: req.body.comment,

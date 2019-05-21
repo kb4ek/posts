@@ -33,7 +33,7 @@ export default class comment extends Model<comment> {
 
   @AllowNull(false)
   @Column(DataType.STRING)
-  public name: string;
+  public author: string;
 
   @AllowNull(false)
   @Column(DataType.TEXT)
