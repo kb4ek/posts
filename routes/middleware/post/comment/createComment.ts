@@ -3,7 +3,7 @@ import { NextFunction, Request, Response } from 'express';
 import Comment from '../../../../database/models/comment';
 import User from '../../../../database/models/user';
 
-const createComment = async (req: Request, res: Response, next: NextFunction) => {
+const createComment = (req: Request, res: Response, next: NextFunction) => {
   const user: User = res.locals.user;
   const postPk = req.query.postId;
 
