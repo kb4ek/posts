@@ -20,6 +20,7 @@ import likePost from '../middleware/post/likePost';
 //comment
 import createComment from '../middleware/post/comment/createComment';
 import commentValidation from '../middleware/post/comment/_validation';
+import deleteComment from '../middleware/post/comment/deleteComment';
 
 const router = Router();
 
@@ -31,5 +32,6 @@ router.post('/delete', checkUser, deletePost);
 router.post('/like', likePost);
 
 router.post('/comment/write', commentValidation, checkValidation, createComment);
+router.post('/comment/delete', checkUser, deleteComment);
 
 export default router;
