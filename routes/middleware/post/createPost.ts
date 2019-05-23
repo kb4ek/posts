@@ -3,7 +3,7 @@ import { NextFunction, Request, Response } from 'express';
 import User from '../../../database/models/user';
 import Post from '../../../database/models/post';
 
-const createPost = async (req: Request, res: Response, next: NextFunction) => {
+const createPost = (req: Request, res: Response, next: NextFunction) => {
   const { title, content } = req.body;
   const user: User = res.locals.user;
 
@@ -12,9 +12,9 @@ const createPost = async (req: Request, res: Response, next: NextFunction) => {
       where: {
         pk: user.pk,
       },
-    }).then((user: User) => {
+    }).then(async (user: User) => {
       try {
-        Post.create({
+        await Post.create({
           userPk: user.pk,
           title: title,
           contents: content,

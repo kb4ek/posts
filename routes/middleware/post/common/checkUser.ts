@@ -3,7 +3,7 @@ import { NextFunction, Request, Response } from 'express';
 import User from '../../../../database/models/user';
 import Post from '../../../../database/models/post';
 
-const findUser = async (req: Request, res: Response, next: NextFunction) => {
+const findUser = (req: Request, res: Response, next: NextFunction) => {
   try {
     const user: User = res.locals.user;
     const pk = req.query.postId;
