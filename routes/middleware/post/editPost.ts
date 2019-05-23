@@ -3,7 +3,7 @@ import { NextFunction, Request, Response } from 'express';
 import User from '../../../database/models/user';
 import Post from '../../../database/models/post';
 
-const editPost = async (req: Request, res: Response, next: NextFunction) => {
+const editPost = (req: Request, res: Response, next: NextFunction) => {
   const { title, content } = req.body;
   const pk = res.locals.temp.postPk;
 

@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 
 import User from '../../../database/models/user';
 
-const findUser = async (req: Request, res: Response, next: NextFunction) => {
+const findUser = (req: Request, res: Response, next: NextFunction) => {
   try {
     const { id } = req.body;
 

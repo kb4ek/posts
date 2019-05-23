@@ -10,8 +10,8 @@ const createComment = (req: Request, res: Response, next: NextFunction) => {
   try {
     User.findOne({
       where: { pk: user.pk },
-    }).then((user: User) => {
-      Comment.create({
+    }).then(async (user: User) => {
+      await Comment.create({
         author: user.name,
         userPk: user.pk,
         postPk: postPk,

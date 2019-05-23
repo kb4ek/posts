@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
 
-import User from '../../../database/models/user';
 import Post from '../../../database/models/post';
 
 const deletePost = async (req: Request, res: Response, next: NextFunction) => {

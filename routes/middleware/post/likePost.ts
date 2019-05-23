@@ -3,7 +3,7 @@ import { NextFunction, Request, Response } from 'express';
 import User from '../../../database/models/user';
 import post_like from '../../../database/models/post_like';
 
-const likePost = async (req: Request, res: Response, next: NextFunction) => {
+const likePost = (req: Request, res: Response, next: NextFunction) => {
   const postPk = req.query.postId;
   const user: User = res.locals.user;
 
@@ -15,9 +15,9 @@ const likePost = async (req: Request, res: Response, next: NextFunction) => {
           userPk: user.pk,
         },
       })
-      .then((like: post_like) => {
+      .then(async (like: post_like) => {
         if (like) {
-          post_like.destroy({
+          await post_like.destroy({
             where: {
               postPk: postPk,
               userPk: user.pk,
@@ -26,7 +26,7 @@ const likePost = async (req: Request, res: Response, next: NextFunction) => {
 
           res.status(200).json({ result: { SUCCESS: true, message: '좋아요 취소' } });
         } else {
-          post_like.create({
+          await post_like.create({
             postPk: postPk,
             userPk: user.pk,
           });
