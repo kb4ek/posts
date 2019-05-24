@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 
-import User from '../../../database/models/user';
+import User from '../../../../database/models/user';
 
 const createUser = async (req: Request, res: Response, next: NextFunction) => {
   const { id, name } = req.body;
@@ -8,7 +8,7 @@ const createUser = async (req: Request, res: Response, next: NextFunction) => {
 
   try {
     await User.create({
-      userID: id,
+      id: id,
       password: password,
       passwordKey: passwordKey,
       name: name,

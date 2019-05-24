@@ -1,7 +1,7 @@
 import { pbkdf2Sync, randomBytes } from 'crypto';
 import { NextFunction, Request, Response } from 'express';
 
-import * as encryptionJson from '../../../config/encryption.json';
+import * as encryptionJson from '../../../../config/encryption.json';
 
 const passwordEncryption = (req: Request, res: Response, next: NextFunction) => {
   const password: string = req.body.password;

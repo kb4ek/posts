@@ -11,36 +11,33 @@ import {
   UpdatedAt,
   Table,
 } from 'sequelize-typescript';
-import Post from './post';
 import User from './user';
+import Comment from './comment';
 
 @Table({
   timestamps: true,
 })
-export default class post_like extends Model<post_like> {
+export default class comment_like extends Model<comment_like> {
   @AutoIncrement
   @PrimaryKey
-  @AllowNull(false)
   @Column(DataType.INTEGER)
   public pk: number;
 
-  @ForeignKey(() => Post)
-  @AllowNull(false)
+  @ForeignKey(() => Comment)
   @Column(DataType.INTEGER)
-  public postPk: number;
+  public commentPk: number;
 
   @ForeignKey(() => User)
-  @AllowNull(false)
   @Column(DataType.INTEGER)
   public userPk: number;
-
-  @BelongsTo(() => Post, {
-    onDelete: 'CASCADE',
-  })
-  public post: Post;
 
   @BelongsTo(() => User, {
     onDelete: 'CASCADE',
   })
   public user: User;
+
+  @BelongsTo(() => Comment, {
+    onDelete: 'CASCADE',
+  })
+  public comment: Comment;
 }
