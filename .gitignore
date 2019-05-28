@@ -5,3 +5,4 @@ config/
 .gitignore.rej
 tslint.json
 .prettierrc
+.env
