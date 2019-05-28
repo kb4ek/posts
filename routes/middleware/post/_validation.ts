@@ -1,8 +1,11 @@
 import { body, ValidationChain } from 'express-validator/check';
-import { title, contents } from '../../../config/regexp.json';
+
+import { title, content } from '../../../config/regexp.json';
 
 const PostValidation: ValidationChain[] = [
-  body('title').isString(),
+  body('title')
+    .isString()
+    .matches(title),
   /* .custom((value, { req }) => {
       const titleRegExp: RegExp = new RegExp(title);
 
@@ -14,7 +17,9 @@ const PostValidation: ValidationChain[] = [
         return false;
       }
     }), */
-  body('content').isString(),
+  body('content')
+    .isString()
+    .matches(content),
   /* .custom((value, { req }) => {
       const contentsRegExp: RegExp = new RegExp(contents);
 
