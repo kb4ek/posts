@@ -29,7 +29,7 @@
       "description": "comment API"
     }
   ],
-  "schemes": ["https"],
+  "schemes": ["http"],
   "paths": {
     "/user/register": {
       "post": {
@@ -103,7 +103,7 @@
       }
     },
     "/user/changepassword": {
-      "post": {
+      "patch": {
         "tags": ["user"],
         "summary": "change user's password",
         "description": "change user's password",
@@ -113,6 +113,7 @@
           {
             "in": "header",
             "name": "token",
+            "type": "string",
             "description": "user의 pk가 담겨있음"
           },
           {
@@ -158,6 +159,7 @@
           {
             "in": "header",
             "name": "token",
+            "type": "string",
             "description": "user의 pk가 담겨있음",
             "required": true
           },
@@ -194,7 +196,7 @@
       }
     },
     "/post/edit": {
-      "post": {
+      "put": {
         "tags": ["post"],
         "summary": "edit post",
         "description": "edit post",
@@ -204,12 +206,14 @@
           {
             "in": "query",
             "name": "postId",
+            "type": "integer",
             "description": "post의 pk가 담겨있음",
             "required": true
           },
           {
             "in": "header",
             "name": "token",
+            "type": "string",
             "description": "user의 pk가 담겨있음",
             "required": true
           },
@@ -249,7 +253,7 @@
       }
     },
     "/post/delete": {
-      "post": {
+      "delete": {
         "tags": ["post"],
         "summary": "delete post",
         "description": "delete post",
@@ -259,17 +263,16 @@
           {
             "in": "query",
             "name": "postId",
+            "type": "integer",
             "description": "post의 pk가 담겨있음",
             "required": true
           },
           {
             "in": "header",
             "name": "token",
+            "type": "string",
             "description": "user의 pk가 담겨있음",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Post"
-            }
+            "required": true
           }
         ],
         "responses": {
@@ -297,26 +300,25 @@
         "produces": ["application/json", "application/xml"],
         "parameters": [
           {
-            "in": "query",
+            "in": "header",
             "name": "postId",
+            "type": "integer",
             "description": "post의 pk가 담겨있음",
             "required": true
           },
           {
             "in": "header",
             "name": "token",
+            "type": "string",
             "description": "user의 pk가 담겨있음",
-            "required": true,
-            "schema": {
-              "$ref": "#definitions/Post_like"
-            }
+            "required": true
           }
         ],
         "responses": {
           "200": {
             "description": "좋아요 성공 or 좋아요 취소",
             "schema": {
-              "$ref": "#definitions/Post_like"
+              "$ref": "#/definitions/Post_like"
             }
           },
           "401": {
@@ -339,12 +341,14 @@
           {
             "in": "query",
             "name": "postId",
+            "type": "integer",
             "description": "post의 pk가 담겨있음",
             "required": true
           },
           {
             "in": "header",
             "name": "token",
+            "type": "string",
             "description": "user의 pk가 담겨있음",
             "required": true
           },
@@ -381,7 +385,7 @@
       }
     },
     "/post/comment/edit": {
-      "post": {
+      "put": {
         "tags": ["post"],
         "summary": "edit a comment",
         "description": "edit comment",
@@ -391,12 +395,14 @@
           {
             "in": "query",
             "name": "postId",
+            "type": "integer",
             "description": "post의 pk가 담겨있음",
             "required": true
           },
           {
             "in": "header",
             "name": "token",
+            "type": "string",
             "description": "user의 pk가 담겨있음",
             "required": true
           },
@@ -436,7 +442,7 @@
       }
     },
     "/post/comment/delete": {
-      "post": {
+      "delete": {
         "tags": ["post"],
         "summary": "delete comment",
         "description": "delete comment",
@@ -446,17 +452,16 @@
           {
             "in": "query",
             "name": "postId, commentPk",
+            "type": "integer",
             "description": "post와 comment의 pk가 담겨있음",
             "required": true
           },
           {
             "in": "header",
             "name": "token",
+            "type": "string",
             "description": "user의 pk가 담겨있음",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Comment"
-            }
+            "required": true
           }
         ],
         "responses": {
@@ -486,17 +491,16 @@
           {
             "in": "query",
             "name": "postId, commentPk",
+            "type": "integer",
             "description": "post와 comment의 pk가 담겨있음",
             "required": true
           },
           {
             "in": "header",
             "name": "token",
+            "type": "string",
             "description": "user의 pk가 담겨있음",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CommentLike"
-            }
+            "required": true
           }
         ],
         "responses": {
@@ -517,6 +521,22 @@
           }
         }
       }
+    }
+  },
+  "securityDefinitions": {
+    "petstore_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "http://petstore.swagger.io/oauth/dialog",
+      "flow": "implicit",
+      "scopes": {
+        "write:pets": "modify pets in your account",
+        "read:pets": "read your pets"
+      }
+    },
+    "api_key": {
+      "type": "apiKey",
+      "name": "api_key",
+      "in": "header"
     }
   },
   "definitions": {
