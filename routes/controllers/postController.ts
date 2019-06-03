@@ -23,13 +23,13 @@ const router = Router();
 router.use(verifyToken);
 
 router.post('/write', postValidation, checkValidation, createPost);
-router.post('/edit', checkUser, postValidation, checkValidation, editPost);
-router.post('/delete', checkUser, deletePost);
+router.put('/edit', checkUser, postValidation, checkValidation, editPost);
+router.delete('/delete', checkUser, deletePost);
 router.post('/like', likePost);
 
 router.post('/comment/write', commentValidation, checkValidation, createComment);
-router.post('/comment/delete', checkUser, deleteComment);
-router.post('/comment/edit', checkUser, editComment);
+router.delete('/comment/delete', checkUser, deleteComment);
+router.put('/comment/edit', checkUser, editComment);
 router.post('/comment/like', likeComment);
 
 export default router;
