@@ -1,9 +1,8 @@
 {
-  "swagger": "2.0",
+  "openapi": "3.0.1",
   "info": {
-    "description": "This is a sample server Petstore server.  You can find out more about     Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).      For this sample, you can use the api key `special-key` to test the authorization     filters.",
-    "version": "1.0.0",
     "title": "post API",
+    "description": "Post 학생회 기능부 타임라인",
     "termsOfService": "http://swagger.io/terms/",
     "contact": {
       "email": "apiteam@swagger.io"
@@ -11,10 +10,18 @@
     "license": {
       "name": "Apache 2.0",
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
-    }
+    },
+    "version": "1.0.0"
   },
-  "host": "localhost:3000",
-  "basePath": "/api",
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/api"
+    }
+  ],
   "tags": [
     {
       "name": "user",
@@ -29,35 +36,40 @@
       "description": "comment API"
     }
   ],
-  "schemes": ["http"],
   "paths": {
     "/user/register": {
       "post": {
         "tags": ["user"],
         "summary": "create new User",
         "description": "create new User",
-        "consumes": ["application/json", "application/xml"],
-        "produces": ["application/json", "application/xml"],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "id, password, name",
-            "description": "회원가입에 필요한 요소들",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/User"
+        "requestBody": {
+          "description": "회원가입에 필요한 요소들",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
             }
-          }
-        ],
+          },
+          "required": true
+        },
         "responses": {
           "200": {
-            "description": "성공적으로 회원가입되셨습니다."
+            "description": "성공적으로 회원가입되셨습니다.",
+            "content": {}
           },
           "400": {
-            "description": "중복된 아이디"
+            "description": "중복된 아이디",
+            "content": {}
           },
           "500": {
-            "description": "server error"
+            "description": "server error",
+            "content": {}
           }
         }
       }
@@ -67,37 +79,55 @@
         "tags": ["user"],
         "summary": "find user and login",
         "description": "find user and login",
-        "consumes": ["application/json", "application/xml"],
-        "produces": ["application/json", "application/xml"],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "id, password",
-            "description": "로그인에 필요한 요소들",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/User"
+        "requestBody": {
+          "description": "로그인에 필요한 요소들",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
             }
-          }
-        ],
+          },
+          "required": true
+        },
         "responses": {
           "200": {
             "description": "로그인 성공",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/User"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
               }
             }
           },
           "400": {
-            "description": "존재하지 않는 아이디"
+            "description": "존재하지 않는 아이디",
+            "content": {}
           },
           "401": {
-            "description": "패스워드 불일치"
+            "description": "패스워드 불일치",
+            "content": {}
           },
           "500": {
-            "description": "server error"
+            "description": "server error",
+            "content": {}
           }
         }
       }
@@ -107,43 +137,65 @@
         "tags": ["user"],
         "summary": "change user's password",
         "description": "change user's password",
-        "consumes": ["application/json", "application/xml"],
-        "produces": ["application/json", "application/xml"],
         "parameters": [
           {
-            "in": "header",
             "name": "token",
-            "type": "string",
-            "description": "user의 pk가 담겨있음"
-          },
-          {
-            "in": "body",
-            "name": "password",
-            "description": "비밀번호 변경에 필요한 요소들",
-            "required": true,
+            "in": "header",
+            "description": "user의 pk가 담겨있음",
             "schema": {
-              "$ref": "#/definitions/User"
+              "type": "string"
             }
           }
         ],
+        "requestBody": {
+          "description": "비밀번호 변경에 필요한 요소들",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          },
+          "required": true
+        },
         "responses": {
           "200": {
             "description": "비밀번호 변경 완료",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/User"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
               }
             }
           },
           "400": {
-            "description": "wrong data"
+            "description": "wrong data",
+            "content": {}
           },
           "401": {
-            "description": "user data error"
+            "description": "user data error",
+            "content": {}
           },
           "500": {
-            "description": "server error"
+            "description": "server error",
+            "content": {}
           }
         }
       }
@@ -153,44 +205,66 @@
         "tags": ["post"],
         "summary": "create a post",
         "description": "create a post",
-        "consumes": ["application/json", "application/xml"],
-        "produces": ["application/json", "application/xml"],
         "parameters": [
           {
-            "in": "header",
             "name": "token",
-            "type": "string",
+            "in": "header",
             "description": "user의 pk가 담겨있음",
-            "required": true
-          },
-          {
-            "in": "body",
-            "name": "title, content",
-            "description": "로그인에 필요한 요소들",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Post"
+              "type": "string"
             }
           }
         ],
+        "requestBody": {
+          "description": "로그인에 필요한 요소들",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Post"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/Post"
+              }
+            }
+          },
+          "required": true
+        },
         "responses": {
           "200": {
             "description": "글이 성공적으로 작성되었습니다.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/User"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
               }
             }
           },
           "400": {
-            "description": "wrong data"
+            "description": "wrong data",
+            "content": {}
           },
           "401": {
-            "description": "user data error"
+            "description": "user data error",
+            "content": {}
           },
           "500": {
-            "description": "server error"
+            "description": "server error",
+            "content": {}
           }
         }
       }
@@ -200,54 +274,79 @@
         "tags": ["post"],
         "summary": "edit post",
         "description": "edit post",
-        "consumes": ["application/json", "application/xml"],
-        "produces": ["application/json", "application/xml"],
         "parameters": [
           {
-            "in": "query",
             "name": "postId",
-            "type": "integer",
+            "in": "query",
             "description": "post의 pk가 담겨있음",
-            "required": true
-          },
-          {
-            "in": "header",
-            "name": "token",
-            "type": "string",
-            "description": "user의 pk가 담겨있음",
-            "required": true
-          },
-          {
-            "in": "body",
-            "name": "title, content",
-            "description": "비밀번호 변경에 필요한 요소들",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Post"
+              "type": "integer"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "user의 pk가 담겨있음",
+            "required": true,
+            "schema": {
+              "type": "string"
             }
           }
         ],
+        "requestBody": {
+          "description": "비밀번호 변경에 필요한 요소들",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Post"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/Post"
+              }
+            }
+          },
+          "required": true
+        },
         "responses": {
           "200": {
             "description": "수정이 완료되었습니다.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/User"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
               }
             }
           },
           "400": {
-            "description": "wrong data"
+            "description": "wrong data",
+            "content": {}
           },
           "401": {
-            "description": "user data error"
+            "description": "user data error",
+            "content": {}
           },
           "402": {
-            "description": "일치하지 않는 유저"
+            "description": "일치하지 않는 유저",
+            "content": {}
           },
           "500": {
-            "description": "server error"
+            "description": "server error",
+            "content": {}
           }
         }
       }
@@ -257,36 +356,42 @@
         "tags": ["post"],
         "summary": "delete post",
         "description": "delete post",
-        "consumes": ["application/json", "application/xml"],
-        "produces": ["application/json", "application/xml"],
         "parameters": [
           {
-            "in": "query",
             "name": "postId",
-            "type": "integer",
+            "in": "query",
             "description": "post의 pk가 담겨있음",
-            "required": true
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
           },
           {
-            "in": "header",
             "name": "token",
-            "type": "string",
+            "in": "header",
             "description": "user의 pk가 담겨있음",
-            "required": true
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "글이 삭제되었습니다."
+            "description": "글이 삭제되었습니다.",
+            "content": {}
           },
           "401": {
-            "description": "user data error"
+            "description": "user data error",
+            "content": {}
           },
           "402": {
-            "description": "일치하지 않는 유저"
+            "description": "일치하지 않는 유저",
+            "content": {}
           },
           "500": {
-            "description": "server error"
+            "description": "server error",
+            "content": {}
           }
         }
       }
@@ -296,36 +401,49 @@
         "tags": ["post"],
         "summary": "like post",
         "description": "like post",
-        "consumes": ["application/json", "application/xml"],
-        "produces": ["application/json", "application/xml"],
         "parameters": [
           {
-            "in": "header",
             "name": "postId",
-            "type": "integer",
+            "in": "header",
             "description": "post의 pk가 담겨있음",
-            "required": true
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
           },
           {
-            "in": "header",
             "name": "token",
-            "type": "string",
+            "in": "header",
             "description": "user의 pk가 담겨있음",
-            "required": true
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "좋아요 성공 or 좋아요 취소",
-            "schema": {
-              "$ref": "#/definitions/Post_like"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Post_like"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Post_like"
+                }
+              }
             }
           },
           "401": {
-            "description": "user data error"
+            "description": "user data error",
+            "content": {}
           },
           "500": {
-            "description": "server error"
+            "description": "server error",
+            "content": {}
           }
         }
       }
@@ -335,51 +453,75 @@
         "tags": ["post"],
         "summary": "create a comment",
         "description": "create a comment",
-        "consumes": ["application/json", "application/xml"],
-        "produces": ["application/json", "application/xml"],
         "parameters": [
           {
-            "in": "query",
             "name": "postId",
-            "type": "integer",
+            "in": "query",
             "description": "post의 pk가 담겨있음",
-            "required": true
-          },
-          {
-            "in": "header",
-            "name": "token",
-            "type": "string",
-            "description": "user의 pk가 담겨있음",
-            "required": true
-          },
-          {
-            "in": "body",
-            "name": "content",
-            "description": "댓글 작성에 필요한 요소들",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Comment"
+              "type": "integer"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "user의 pk가 담겨있음",
+            "required": true,
+            "schema": {
+              "type": "string"
             }
           }
         ],
+        "requestBody": {
+          "description": "댓글 작성에 필요한 요소들",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Comment"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/Comment"
+              }
+            }
+          },
+          "required": true
+        },
         "responses": {
           "200": {
             "description": "댓글이 작성되었습니다.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Comment"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Comment"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Comment"
+                  }
+                }
               }
             }
           },
           "400": {
-            "description": "wrong data"
+            "description": "wrong data",
+            "content": {}
           },
           "401": {
-            "description": "user data error"
+            "description": "user data error",
+            "content": {}
           },
           "500": {
-            "description": "server error"
+            "description": "server error",
+            "content": {}
           }
         }
       }
@@ -389,54 +531,79 @@
         "tags": ["post"],
         "summary": "edit a comment",
         "description": "edit comment",
-        "consumes": ["application/json", "application/xml"],
-        "produces": ["application/json", "application/xml"],
         "parameters": [
           {
-            "in": "query",
             "name": "postId",
-            "type": "integer",
+            "in": "query",
             "description": "post의 pk가 담겨있음",
-            "required": true
-          },
-          {
-            "in": "header",
-            "name": "token",
-            "type": "string",
-            "description": "user의 pk가 담겨있음",
-            "required": true
-          },
-          {
-            "in": "body",
-            "name": "content",
-            "description": "댓글 수정에 필요한 요소들",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Comment"
+              "type": "integer"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "user의 pk가 담겨있음",
+            "required": true,
+            "schema": {
+              "type": "string"
             }
           }
         ],
+        "requestBody": {
+          "description": "댓글 수정에 필요한 요소들",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Comment"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/Comment"
+              }
+            }
+          },
+          "required": true
+        },
         "responses": {
           "200": {
             "description": "댓글 수정 성공",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Comment"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Comment"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Comment"
+                  }
+                }
               }
             }
           },
           "400": {
-            "description": "wrong data"
+            "description": "wrong data",
+            "content": {}
           },
           "401": {
-            "description": "user data error"
+            "description": "user data error",
+            "content": {}
           },
           "402": {
-            "description": "일치하지 않는 유저"
+            "description": "일치하지 않는 유저",
+            "content": {}
           },
           "500": {
-            "description": "server error"
+            "description": "server error",
+            "content": {}
           }
         }
       }
@@ -446,36 +613,42 @@
         "tags": ["post"],
         "summary": "delete comment",
         "description": "delete comment",
-        "consumes": ["application/json", "application/xml"],
-        "produces": ["application/json", "application/xml"],
         "parameters": [
           {
-            "in": "query",
             "name": "postId, commentPk",
-            "type": "integer",
+            "in": "query",
             "description": "post와 comment의 pk가 담겨있음",
-            "required": true
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
           },
           {
-            "in": "header",
             "name": "token",
-            "type": "string",
+            "in": "header",
             "description": "user의 pk가 담겨있음",
-            "required": true
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "댓글 삭제 성공."
+            "description": "댓글 삭제 성공.",
+            "content": {}
           },
           "401": {
-            "description": "user data error"
+            "description": "user data error",
+            "content": {}
           },
           "402": {
-            "description": "일치하지 않는 유저"
+            "description": "일치하지 않는 유저",
+            "content": {}
           },
           "500": {
-            "description": "server error"
+            "description": "server error",
+            "content": {}
           }
         }
       }
@@ -485,152 +658,169 @@
         "tags": ["post"],
         "summary": "like a comment",
         "description": "like a comment",
-        "consumes": ["application/json", "application/xml"],
-        "produces": ["application/json", "application/xml"],
         "parameters": [
           {
-            "in": "query",
             "name": "postId, commentPk",
-            "type": "integer",
+            "in": "query",
             "description": "post와 comment의 pk가 담겨있음",
-            "required": true
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
           },
           {
-            "in": "header",
             "name": "token",
-            "type": "string",
+            "in": "header",
             "description": "user의 pk가 담겨있음",
-            "required": true
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "좋아요 성공 or 좋아요 취소",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/CommentLike"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CommentLike"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CommentLike"
+                  }
+                }
               }
             }
           },
           "401": {
-            "description": "user data error"
+            "description": "user data error",
+            "content": {}
           },
           "500": {
-            "description": "server error"
+            "description": "server error",
+            "content": {}
           }
         }
       }
     }
   },
-  "securityDefinitions": {
-    "petstore_auth": {
-      "type": "oauth2",
-      "authorizationUrl": "http://petstore.swagger.io/oauth/dialog",
-      "flow": "implicit",
-      "scopes": {
-        "write:pets": "modify pets in your account",
-        "read:pets": "read your pets"
-      }
-    },
-    "api_key": {
-      "type": "apiKey",
-      "name": "api_key",
-      "in": "header"
-    }
-  },
-  "definitions": {
-    "User": {
-      "type": "object",
-      "properties": {
-        "pk": {
-          "type": "integer"
-        },
-        "id": {
-          "type": "string"
-        },
-        "password": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
+  "components": {
+    "schemas": {
+      "Comment": {
+        "type": "object",
+        "properties": {
+          "pk": {
+            "type": "integer"
+          },
+          "postPk": {
+            "type": "integer"
+          },
+          "userPk": {
+            "type": "integer"
+          },
+          "author": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          }
         }
       },
-      "xml": {
-        "name": "User"
-      }
-    },
-    "Post": {
-      "type": "object",
-      "properties": {
-        "pk": {
-          "type": "integer"
-        },
-        "userPk": {
-          "type": "integer"
-        },
-        "title": {
-          "type": "string"
-        },
-        "content": {
-          "type": "string"
-        },
-        "author": {
-          "type": "string"
+      "CommentLike": {
+        "type": "object",
+        "properties": {
+          "pk": {
+            "type": "integer"
+          },
+          "postPk": {
+            "type": "integer"
+          },
+          "userPk": {
+            "type": "integer"
+          }
         }
       },
-      "xml": {
-        "name": "Tag"
-      }
-    },
-    "Comment": {
-      "type": "object",
-      "properties": {
-        "pk": {
-          "type": "integer"
+      "User": {
+        "type": "object",
+        "properties": {
+          "pk": {
+            "type": "integer"
+          },
+          "id": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
         },
-        "postPk": {
-          "type": "integer"
+        "xml": {
+          "name": "User"
+        }
+      },
+      "Post": {
+        "type": "object",
+        "properties": {
+          "pk": {
+            "type": "integer"
+          },
+          "userPk": {
+            "type": "integer"
+          },
+          "title": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          },
+          "author": {
+            "type": "string"
+          }
         },
-        "userPk": {
-          "type": "integer"
-        },
-        "author": {
-          "type": "string"
-        },
-        "content": {
-          "type": "string"
+        "xml": {
+          "name": "Tag"
+        }
+      },
+      "Post_like": {
+        "type": "object",
+        "properties": {
+          "pk": {
+            "type": "integer"
+          },
+          "userPk": {
+            "type": "integer"
+          }
         }
       }
     },
-    "CommentLike": {
-      "type": "object",
-      "properties": {
-        "pk": {
-          "type": "integer"
-        },
-        "postPk": {
-          "type": "integer"
-        },
-        "userPk": {
-          "type": "integer"
+    "securitySchemes": {
+      "petstore_auth": {
+        "type": "oauth2",
+        "flows": {
+          "implicit": {
+            "authorizationUrl": "http://petstore.swagger.io/oauth/dialog",
+            "scopes": {
+              "write:pets": "modify pets in your account",
+              "read:pets": "read your pets"
+            }
+          }
         }
-      }
-    },
-    "Post_like": {
-      "type": "object",
-      "properties": {
-        "pk": {
-          "type": "integer"
-        },
-        "userPk": {
-          "type": "integer"
-        }
+      },
+      "api_key": {
+        "type": "apiKey",
+        "name": "api_key",
+        "in": "header"
       }
     }
-  },
-  "externalDocs": {
-    "description": "Find out more about Swagger",
-    "url": "http://swagger.io"
   }
 }
