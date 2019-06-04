@@ -132,7 +132,7 @@
         }
       }
     },
-    "/user/changepassword": {
+    "/user/change/password": {
       "patch": {
         "tags": ["user"],
         "summary": "change user's password",
@@ -200,7 +200,7 @@
         }
       }
     },
-    "/post/write": {
+    "/post": {
       "post": {
         "tags": ["post"],
         "summary": "create a post",
@@ -269,8 +269,8 @@
         }
       }
     },
-    "/post/edit": {
-      "put": {
+    "/post": {
+      "patch": {
         "tags": ["post"],
         "summary": "edit post",
         "description": "edit post",
@@ -351,7 +351,7 @@
         }
       }
     },
-    "/post/delete": {
+    "/post": {
       "delete": {
         "tags": ["post"],
         "summary": "delete post",
@@ -448,7 +448,7 @@
         }
       }
     },
-    "/post/comment/write": {
+    "/post/comment": {
       "post": {
         "tags": ["post"],
         "summary": "create a comment",
@@ -526,8 +526,8 @@
         }
       }
     },
-    "/post/comment/edit": {
-      "put": {
+    "/post/comment": {
+      "patch": {
         "tags": ["post"],
         "summary": "edit a comment",
         "description": "edit comment",
@@ -608,7 +608,7 @@
         }
       }
     },
-    "/post/comment/delete": {
+    "/post/comment": {
       "delete": {
         "tags": ["post"],
         "summary": "delete comment",
