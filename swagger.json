@@ -203,8 +203,8 @@
     "/post": {
       "post": {
         "tags": ["post"],
-        "summary": "create a post",
-        "description": "create a post",
+        "summary": "create post",
+        "description": "create post",
         "parameters": [
           {
             "name": "token",
@@ -217,7 +217,7 @@
           }
         ],
         "requestBody": {
-          "description": "로그인에 필요한 요소들",
+          "description": "게시글 작성에 필요한 요소들",
           "content": {
             "application/json": {
               "schema": {
@@ -229,26 +229,25 @@
                 "$ref": "#/components/schemas/Post"
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
-            "description": "글이 성공적으로 작성되었습니다.",
+            "description": "게시글 작성완료",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/User"
+                    "$ref": "#/components/schemas/Post"
                   }
                 }
               },
               "application/xml": {
                 "schema": {
-                  "type": "array",
+                  "type": "object",
                   "items": {
-                    "$ref": "#/components/schemas/User"
+                    "$ref": "#/components/schemas/Post"
                   }
                 }
               }
@@ -259,32 +258,19 @@
             "content": {}
           },
           "401": {
-            "description": "user data error",
-            "content": {}
+            "description": "user data error"
           },
           "500": {
-            "description": "server error",
-            "content": {}
+            "description": "server error"
           }
         }
-      }
-    },
-    "/post": {
+      },
       "patch": {
         "tags": ["post"],
         "summary": "edit post",
         "description": "edit post",
         "parameters": [
           {
-            "name": "postId",
-            "in": "query",
-            "description": "post의 pk가 담겨있음",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          },
-          {
             "name": "token",
             "in": "header",
             "description": "user의 pk가 담겨있음",
@@ -292,10 +278,19 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "postId",
+            "in": "query",
+            "description": "post의 pk가 담겨있음",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
           }
         ],
         "requestBody": {
-          "description": "비밀번호 변경에 필요한 요소들",
+          "description": "게시글 수정에 필요한 요소들",
           "content": {
             "application/json": {
               "schema": {
@@ -307,26 +302,25 @@
                 "$ref": "#/components/schemas/Post"
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
-            "description": "수정이 완료되었습니다.",
+            "description": "게시글 수정완료",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/User"
+                    "$ref": "#/components/schemas/Post"
                   }
                 }
               },
               "application/xml": {
                 "schema": {
-                  "type": "array",
+                  "type": "object",
                   "items": {
-                    "$ref": "#/components/schemas/User"
+                    "$ref": "#/components/schemas/Post"
                   }
                 }
               }
@@ -337,21 +331,13 @@
             "content": {}
           },
           "401": {
-            "description": "user data error",
-            "content": {}
-          },
-          "402": {
-            "description": "일치하지 않는 유저",
-            "content": {}
+            "description": "user data error"
           },
           "500": {
-            "description": "server error",
-            "content": {}
+            "description": "server error"
           }
         }
-      }
-    },
-    "/post": {
+      },
       "delete": {
         "tags": ["post"],
         "summary": "delete post",
@@ -451,18 +437,9 @@
     "/post/comment": {
       "post": {
         "tags": ["post"],
-        "summary": "create a comment",
-        "description": "create a comment",
+        "summary": "create comment",
+        "description": "create comment",
         "parameters": [
-          {
-            "name": "postId",
-            "in": "query",
-            "description": "post의 pk가 담겨있음",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          },
           {
             "name": "token",
             "in": "header",
@@ -470,6 +447,15 @@
             "required": true,
             "schema": {
               "type": "string"
+            }
+          },
+          {
+            "name": "postId",
+            "in": "query",
+            "description": "post의 pk가 담겨있음",
+            "required": true,
+            "schema": {
+              "type": "number"
             }
           }
         ],
@@ -486,12 +472,11 @@
                 "$ref": "#/components/schemas/Comment"
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
-            "description": "댓글이 작성되었습니다.",
+            "description": "댓글 작성완료",
             "content": {
               "application/json": {
                 "schema": {
@@ -516,31 +501,18 @@
             "content": {}
           },
           "401": {
-            "description": "user data error",
-            "content": {}
+            "description": "user data error"
           },
           "500": {
-            "description": "server error",
-            "content": {}
+            "description": "server error"
           }
         }
-      }
-    },
-    "/post/comment": {
+      },
       "patch": {
         "tags": ["post"],
-        "summary": "edit a comment",
+        "summary": "edit comment",
         "description": "edit comment",
         "parameters": [
-          {
-            "name": "postId",
-            "in": "query",
-            "description": "post의 pk가 담겨있음",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          },
           {
             "name": "token",
             "in": "header",
@@ -548,6 +520,15 @@
             "required": true,
             "schema": {
               "type": "string"
+            }
+          },
+          {
+            "name": "postId, commentPk",
+            "in": "query",
+            "description": "post와 comment의 pk가 담겨있음",
+            "required": true,
+            "schema": {
+              "type": "number"
             }
           }
         ],
@@ -564,12 +545,11 @@
                 "$ref": "#/components/schemas/Comment"
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
-            "description": "댓글 수정 성공",
+            "description": "댓글 수정완료",
             "content": {
               "application/json": {
                 "schema": {
@@ -581,7 +561,7 @@
               },
               "application/xml": {
                 "schema": {
-                  "type": "array",
+                  "type": "object",
                   "items": {
                     "$ref": "#/components/schemas/Comment"
                   }
@@ -594,21 +574,13 @@
             "content": {}
           },
           "401": {
-            "description": "user data error",
-            "content": {}
-          },
-          "402": {
-            "description": "일치하지 않는 유저",
-            "content": {}
+            "description": "user data error"
           },
           "500": {
-            "description": "server error",
-            "content": {}
+            "description": "server error"
           }
         }
-      }
-    },
-    "/post/comment": {
+      },
       "delete": {
         "tags": ["post"],
         "summary": "delete comment",
