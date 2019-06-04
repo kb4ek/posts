@@ -23,13 +23,13 @@ import changePassword from '../middleware/user/changePassword/changePassword';
 
 const router = Router();
 
-router.patch('/changepassword', changePasswordValidation);
+router.patch('/change/password', changePasswordValidation);
 router.post('/login', LoginValidation);
 router.post('/register', RegisterValidation);
 
 router.use(checkValidation);
 
-router.patch('/changepassword', verifyToken, passwordEncryption, changePassword);
+router.patch('/change/password', verifyToken, passwordEncryption, changePassword);
 router.post('/login', findUser, passwordEncryption, login, issueToken);
 router.post('/register', findUser, passwordEncryption, createUser);
 

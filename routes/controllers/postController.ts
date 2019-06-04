@@ -22,14 +22,14 @@ const router = Router();
 
 router.use(verifyToken);
 
-router.post('/write', postValidation, checkValidation, createPost);
-router.put('/edit', checkUser, postValidation, checkValidation, editPost);
-router.delete('/delete', checkUser, deletePost);
+router.post('/', postValidation, checkValidation, createPost);
+router.patch('/', checkUser, postValidation, checkValidation, editPost);
+router.delete('/', checkUser, deletePost);
 router.post('/like', likePost);
 
-router.post('/comment/write', commentValidation, checkValidation, createComment);
-router.delete('/comment/delete', checkUser, deleteComment);
-router.put('/comment/edit', checkUser, editComment);
+router.post('/comment/', commentValidation, checkValidation, createComment);
+router.delete('/comment/', checkUser, deleteComment);
+router.put('/comment/', checkUser, editComment);
 router.post('/comment/like', likeComment);
 
 export default router;
